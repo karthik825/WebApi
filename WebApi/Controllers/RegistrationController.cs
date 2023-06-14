@@ -22,7 +22,9 @@ namespace WebApi.Controllers
         {
             SqlConnection con = new SqlConnection(_configuration.GetConnectionString("ToysCon").ToString());
             SqlCommand cmd = new SqlCommand("INSERT INTO Registration(UserName,Password,Email,IsActive) VALUES('"+registration.UserName +"', '"+registration.Password +"', '"+registration.Email +"', '" +registration.IsActive+"')", con);
+            con.Open();
             int i=cmd.ExecuteNonQuery();
+            con.Close();
             if(i>0)
             {
                 return "command executed";
